@@ -1,6 +1,6 @@
 version: '2'
 services:
-  gocd-server:
+  server:
     build:
       context: .
       dockerfile: Dockerfile.server

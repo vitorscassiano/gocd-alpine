@@ -1,3 +1,12 @@
 FROM anapsix/alpine-java
+RUN apk update && apk add curl git
 RUN curl -o /tmp/go-server.zip https://download.go.cd/binaries/16.4.0-3223/generic/go-server-16.4.0-3223.zip 
+RUN unzip /tmp/go-server.zip -d /opt/ && mv /opt/go-server-16.4.0 /opt/go-server 
 
+#RUN curl -Lo /tmp/maven.zip http://mirror.nbtelecom.com.br/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.zip
+#RUN unzip /tmp/maven.zip -d /opt/ && mv /opt/apache-maven-3.3.9 /opt/maven
+
+RUN rm -rf /tmp/*
+#ADD go-agent-start.sh /go-agent-start.sh
+
+#ENTRYPOINT "./go-agent-start.sh"
