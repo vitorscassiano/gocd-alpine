@@ -4,3 +4,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.server
+    ports:
+      - 8153:8153
+      - 8154:8154
