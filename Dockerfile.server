@@ -1,5 +1,5 @@
 FROM anapsix/alpine-java
-RUN apk update && apk add curl git
+RUN apk update && apk add curl git docker
 RUN curl -o /tmp/go-server.zip https://download.go.cd/binaries/16.4.0-3223/generic/go-server-16.4.0-3223.zip 
 RUN unzip /tmp/go-server.zip -d /opt/ && mv /opt/go-server-16.4.0 /opt/go-server 
 
@@ -7,6 +7,11 @@ RUN unzip /tmp/go-server.zip -d /opt/ && mv /opt/go-server-16.4.0 /opt/go-server
 #RUN unzip /tmp/maven.zip -d /opt/ && mv /opt/apache-maven-3.3.9 /opt/maven
 
 RUN rm -rf /tmp/*
-#ADD go-agent-start.sh /go-agent-start.sh
 
-#ENTRYPOINT "./go-agent-start.sh"
+ADD build/go-common-scripts.sh /etc/service/go-server/go-common-scripts.sh 
+ADD build/go-server-start.sh /etc/service/go-server/run
+RUN chmod 777 /opt/go-server/server.sh
+
+EXPOSE 8153 8154
+
+CMD ["/etc/service/go-server/run"]
